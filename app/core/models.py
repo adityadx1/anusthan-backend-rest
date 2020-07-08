@@ -6,7 +6,8 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
 class UserManager(BaseUserManager):
 
     def create_user(self, userid, firstname, middlename, lastname, phonenumber,
-                    emailid, dob, gender, firebaseuserid, password):
+                    emailid, dob, gender, firebaseuserid, password,
+                    **extra_fields):
 
         """Creates and saves a user"""
 
@@ -17,7 +18,8 @@ class UserManager(BaseUserManager):
                           phonenumber=phonenumber,
                           emailid=self.normalize_email(emailid),
                           dob=dob, gender=gender,
-                          firebaseuserid=firebaseuserid)
+                          firebaseuserid=firebaseuserid,
+                          **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
 
@@ -30,7 +32,7 @@ class UserManager(BaseUserManager):
         user = self.create_user(userid, firstname, middlename, lastname,
                                 phonenumber, emailid, dob, gender,
                                 firebaseuserid, password)
-
+        user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)
 
@@ -40,7 +42,6 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
 
     """Custom user model"""
-
     userid = models.CharField(max_length=255, unique=True)
     firstname = models.CharField(max_length=255)
     middlename = models.CharField(max_length=255)
@@ -50,6 +51,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     dob = models.CharField(max_length=50)
     gender = models.CharField(max_length=20)
     firebaseuserid = models.TextField()
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
 
     objects = UserManager()
 
