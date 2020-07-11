@@ -25,9 +25,9 @@ class UserManager(BaseUserManager):
 
         return user
 
-    def create_super_user(self, userid, firstname, middlename, lastname,
-                          phonenumber, emailid, dob, gender, firebaseuserid,
-                          password):
+    def create_superuser(self, userid, firstname, middlename, lastname,
+                         phonenumber, emailid, dob, gender, firebaseuserid,
+                         password):
         """Creates and saves a super user"""
         user = self.create_user(userid, firstname, middlename, lastname,
                                 phonenumber, emailid, dob, gender,
@@ -53,7 +53,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     firebaseuserid = models.TextField()
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-
+    REQUIRED_FIELDS = ['firstname', 'middlename', 'lastname', 'phonenumber',
+                       'emailid', 'dob', 'gender', 'firebaseuserid']
     objects = UserManager()
 
     USERNAME_FIELD = 'userid'
