@@ -13,16 +13,17 @@ services:
              python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"
     environment:
-      - DB_HOST=database-1-instance-1.cigdbgpbunqe.ap-south-1.rds.amazonaws.com
-      - DB_NAME=Anusthan_DevDB
+      - DB_HOST=database-1.cigdbgpbunqe.ap-south-1.rds.amazonaws.com
+      - DB_NAME=postgres
       - DB_USER=root
       - DB_PASS=anusthan
     depends_on:
       - db
 
+
   db:
     image: postgres:12-alpine
     environment:
-      - POSTGRES_DB=Anusthan_DevDB
+      - POSTGRES_DB=postgres
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=anusthan

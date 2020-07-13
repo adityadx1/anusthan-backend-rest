@@ -50,7 +50,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     emailid = models.EmailField(max_length=255)
     dob = models.CharField(max_length=50)
     gender = models.CharField(max_length=20)
-    firebaseuserid = models.TextField()
+    firebaseuserid = models.TextField(unique=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     REQUIRED_FIELDS = ['firstname', 'middlename', 'lastname', 'phonenumber',
