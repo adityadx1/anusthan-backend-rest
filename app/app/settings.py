@@ -25,7 +25,7 @@ SECRET_KEY = 'wgwin36i09^fvxg==ysi^u+g3_5j&3lnts#co_*l&s2f3we)&7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['13.233.251.105', 'localhost', '127.0.0.1']
 
 
 # Application definition
