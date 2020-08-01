@@ -5,12 +5,12 @@ from core import models
 
 
 class UserAdmin(BaseUserAdmin):
-    ordering = ['id']
+    ordering = ['userid']
     list_display = ['userid', 'firstname', 'middlename', 'lastname',
                     'phonenumber', 'emailid', 'dob', 'gender',
                     'firebaseuserid']
     fieldsets = (
-        (None, {'fields': ('userid', 'password', 'firebaseuserid')}),
+        (None, {'fields': ('firebaseuserid',)}),
         (_('Personal Info'), {'fields': ('firstname', 'middlename', 'lastname',
                               'phonenumber', 'emailid', 'dob', 'gender')}),
         (
@@ -22,9 +22,10 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('userid', 'password', 'firebaseuserid')
+            'fields': ('firebaseuserid',)
         }),
     )
 
 
 admin.site.register(models.User, UserAdmin)
+# admin.site.register(models.Event)
